@@ -1,10 +1,13 @@
 #include <iostream>
-
+#include "cipher.h"
 using namespace std;
 
 int main()
 {
-    cout << "Caesar Cipher CLI" << endl;
+    cout << "Welcome to the Caesar Cipher CLI!" << endl;
+
+    cipher obj;
+    obj.fun_choice();
 
     return 0;
 }
