@@ -34,4 +34,8 @@ while (getline(file, line))
         }
      }
 }
+ofstream outputFile("data/encrypted.txt");
+outputFile << coded;
+outputFile.close();
+cout << "Encryption completed. Encrypted text saved to data/encrypted.txt" << endl;
 }
