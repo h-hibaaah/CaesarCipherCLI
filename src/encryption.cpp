@@ -1,11 +1,30 @@
 #include "encryption.h"
 #include <fstream>
 #include <iostream>
-using namespace std;
 #include <string>
+using namespace std;
 void Encryption::encrypt()
 {
-    char ch;
+    char currentchar;
+     int shift;
+while (true)
+{
+    cout << "Enter shift value: ";
+
+    cin >> shift;
+
+    if (cin.fail())
+    {
+        cout << "Invalid input! Please enter a number.\n";
+
+        cin.clear(); // Error state remove
+        cin.ignore(1000, '\n'); // Wrong input discard
+    }
+    else
+    {
+        break; // Valid input
+    }
+}
     string coded;
     ifstream file("data/input.txt");
     string line;
@@ -17,22 +36,24 @@ while (getline(file, line))
 {
      for (int i = 0; i < line.length(); i++)
      {
-        ch = line[i];
-        if (ch >= 'A' && ch <= 'Z')
+        currentchar = line[i];
+        if (currentchar >= 'A' && currentchar <= 'Z')
         {
-            ch = ((ch - 'A' + 3))% 26 + 'A';
-            coded += ch;
+            currentchar = ((currentchar - 'A' + shift))% 26 + 'A';
+            coded += currentchar;
         }
-         else if (ch >= 'a' && ch <= 'z')
+         else if (currentchar >= 'a' && currentchar <= 'z')
         {
-            ch = ((ch - 'a' + 3))% 26 + 'a';
-            coded += ch;
+            currentchar = ((currentchar - 'a' + shift))% 26 + 'a';
+            coded += currentchar;
         }
         else
         {
-            coded += ch;
+            coded += currentchar;
         }
+    
      }
+       coded+="\n";
 }
 ofstream outputFile("data/encrypted.txt");
 outputFile << coded;

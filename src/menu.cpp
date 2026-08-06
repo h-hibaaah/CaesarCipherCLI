@@ -1,9 +1,9 @@
-#include "cipher.h"
+#include "menu.h"
 #include "encryption.h"
 #include "decryption.h"
 #include<iostream>
 using namespace std;
-void cipher::fun_choice()
+void Menu::showmenu()
 {
     while (true)
     {
@@ -14,18 +14,19 @@ void cipher::fun_choice()
     {
         case 1:
         {
-        Encryption obj1;
-            obj1.encrypt();
+        Encryption encryptor;
+            encryptor.encrypt();
             break;
         }
         case 2:
-        {    Decryption obj2;
-            obj2.decrypt();
+        {    Decryption decryptor;
+            decryptor.decrypt();
         break;
         }
         case 3:
         {
-            exit(0);
+            cout<<"Exiting the program."<<endl;
+            return;
         }
         default:
         cout<<"Invalid Choice!";

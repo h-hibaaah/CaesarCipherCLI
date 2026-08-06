@@ -1,13 +1,32 @@
 #include "decryption.h"
 #include <fstream>
+#include <string>
 #include <iostream>
 using namespace std;
-#include <string>
 void Decryption::decrypt()
 {
+    int shift;
+  while (true)
+{
+    cout << "Enter shift value: ";
+
+    cin >> shift;
+
+    if (cin.fail())
+    {
+        cout << "Invalid input! Please enter a number.\n";
+
+        cin.clear(); // Error state remove
+        cin.ignore(1000, '\n'); // Wrong input discard
+    }
+    else
+    {
+        break; // Valid input
+    }
+}
     string line;
     string decoded;
-    char ch;
+    char currentchar;
     ifstream file("data/encrypted.txt");
     if (!file.is_open()) {
         cout << "Error opening file" << endl;
@@ -17,22 +36,23 @@ void Decryption::decrypt()
         
         for (int i = 0; i < line.length(); i++)
         {
-            ch = line[i];
-            if (ch >= 'A' && ch <= 'Z')
+            currentchar = line[i];
+            if (currentchar >= 'A' && currentchar <= 'Z')
             {
-                ch = ((ch - 'A' - 3 + 26) % 26) + 'A';
-              decoded += ch;
+                currentchar = ((currentchar - 'A' - shift + 26) % 26) + 'A';
+              decoded += currentchar;
             }
-            else if (ch >= 'a' && ch <= 'z')
+            else if (currentchar >= 'a' && currentchar <= 'z')
             {
-                ch = ((ch - 'a' - 3 + 26) % 26) + 'a';
-                decoded += ch;
+                currentchar = ((currentchar - 'a' - shift + 26) % 26) + 'a';
+                decoded += currentchar;
             }
             else
             {
-                decoded += ch;
+                decoded += currentchar;
             }
         }
+        decoded += "\n";    
         cout << endl;
     }
     ofstream outputFile("data/decrypted.txt");
